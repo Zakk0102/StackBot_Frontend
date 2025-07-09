@@ -1,7 +1,15 @@
 import { createContext, useContext, useEffect, useState, useRef } from "react";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL ;
-const wsUrl = backendUrl.replace('http', 'ws') + '/ws';
+const wsUrl =
+  import.meta.env.VITE_WEBSOCKET_URL ||
+  (import.meta.env.VITE_BACKEND_URL
+    ? import.meta.env.VITE_BACKEND_URL.replace(/^http/, 'ws') + '/ws'
+    : null);
+
+if (!wsUrl) {
+  throw new Error('WebSocket URL is not defined. Please set VITE_WEBSOCKET_URL or VITE_BACKEND_URL in your environment.');
+}
 
 const ChatContext = createContext();
 
