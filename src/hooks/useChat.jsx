@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useRef } from "react";
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+const backendUrl = import.meta.env.VITE_BACKEND_URL ;
 const wsUrl = backendUrl.replace('http', 'ws') + '/ws';
 
 const ChatContext = createContext();
