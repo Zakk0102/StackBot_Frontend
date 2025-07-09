@@ -23,6 +23,8 @@ FROM nginx:alpine
 
 # Copy built application to nginx
 COPY --from=0 /app/dist /usr/share/nginx/html
+# Ensure animations directory is copied (in case Vite does not copy unused assets)
+COPY --from=0 /app/public/animations /usr/share/nginx/html/animations
 
 # Copy nginx configuration (optional - you can create a custom nginx.conf if needed)
 # COPY nginx.conf /etc/nginx/nginx.conf
@@ -31,4 +33,4 @@ COPY --from=0 /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 # Start nginx
-CMD ["nginx", "-g", "daemon off;"] 
+CMD ["nginx", "-g", "daemon off;"]
